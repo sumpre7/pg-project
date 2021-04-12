@@ -11,6 +11,7 @@ BEGIN
     FOR  ii IN 1..number_relationlayer-1 LOOP
             relationlayer_index = ii;
             WHILE relationlayer_index <= number_relationlayer LOOP
+                -- 只考虑组合情况，
                     relationlayer_index = relationlayer_index + 1;
                     if( to_regclass(relationlayers[ii]) is null or  to_regclass(relationlayers[relationlayer_index]) is null ) then
                         return;
