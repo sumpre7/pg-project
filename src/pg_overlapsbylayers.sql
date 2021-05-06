@@ -13,17 +13,17 @@ BEGIN
             WHILE relationlayer_index <= number_relationlayer LOOP
                 -- 只考虑组合情况，
                     relationlayer_index = relationlayer_index + 1;
-                    if( to_regclass(relationlayers[ii]) is null or  to_regclass(relationlayers[relationlayer_index]) is null ) then
-                        return;
-                    end if;
-                    RETURN QUERY EXECUTE
+                    if( to_regclass(relationlayers[ii]) is not null and  to_regclass(relationlayers[relationlayer_index]) is not null ) then
+                        RETURN QUERY EXECUTE
                     'select a.'||checkuniqueid||',b.'||checkuniqueid||' as referenceCheckentityCheckuniqueid ,
 					 a.'||displayname||' as bsm  , b.'||displayname||' as refbsm ,
 				  	'''||relationlayers[ii]||''' as layer , '''||relationlayers[relationlayer_index]||''' as reflayer
 						from '||relationlayers[ii]||' a inner join '||relationlayers[relationlayer_index]||' b on  st_isvalid(a.'||fieldname||') and st_isvalid(b.'||fieldname||') and
 						st_intersects(a.'||fieldname||',b.'||fieldname||')
 					and ST_Area(st_intersection(a.'||fieldname||',b.'||fieldname||')) > '||tolerance||'';
-                    relationlayer_index = relationlayer_index + 1;
+                        relationlayer_index = relationlayer_index + 1;
+                    end if;
+
                 END LOOP;
         END LOOP;
 END;
