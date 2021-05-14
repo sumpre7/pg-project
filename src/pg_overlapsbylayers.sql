@@ -1,7 +1,7 @@
 --  传入图层名及待检查和容差精度的空间字段  包含返回面积 来判断
 -- SELECT * FROM diit_overlapsbylayers1('checkuniqueid','bsm','{xzq,xzq1,xzq2}','the_geom',0.001) t
 -- (checkuniqueid INT,referenceCheckentityCheckuniqueid INT,bsm NUMERIC,refbsm varchar,layer TEXT,reflayer TEXT);
-CREATE OR REPLACE FUNCTION public.diit_overlapsbylayers(checkuniqueid text,displayname text,relationlayers text[],fieldname text,tolerance float)
+CREATE OR REPLACE FUNCTION public.pg_overlapsbylayers(checkuniqueid text,displayname text,relationlayers text[],fieldname text,tolerance float)
     RETURNS SETOF RECORD  AS $$
 DECLARE
     number_relationlayer integer := array_length(relationlayers, 1);

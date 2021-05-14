@@ -1,5 +1,5 @@
 --  传入图层名及待检查和容差精度的空间字段  包含返回面积 来判断
-CREATE OR REPLACE FUNCTION public.diit_overlaps(layername text,fieldname text,tolerance float)
+CREATE OR REPLACE FUNCTION public.pg_overlaps(layername text,fieldname text,tolerance float)
 RETURNS SETOF RECORD  AS $$
 BEGIN
 	RETURN  QUERY EXECUTE
